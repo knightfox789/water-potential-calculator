@@ -34,7 +34,7 @@ jobs:
         env:
           LIVE_URL: https://knightfox789.github.io/water-potential-calculator/
         run: |
-          cat > /tmp/live-acceptance.mjs <<'JS'
+          cat > live-acceptance.mjs <<'JS'
           import { chromium } from 'playwright';
           import fs from 'node:fs';
 
@@ -48,7 +48,7 @@ jobs:
           page.on('pageerror',e=>pageErrors.push(String(e)));
 
           const evidence={schema:'WPC-LIVE-ACCEPTANCE-v1',version:'1.1.0',url,checks:[],consoleErrors,pageErrors};
-          const check=(name,ok,detail='')=>{evidence.checks.push({name,ok,detail}); if(!ok) throw new Error(`${name}: ${detail}`);};
+          const check=(name,ok,detail='')=>{evidence.checks.push({name,ok:Boolean(ok),detail}); if(!ok) throw new Error(`${name}: ${detail}`);};
 
           try {
             const response=await page.goto(url,{waitUntil:'networkidle',timeout:60000});
@@ -123,7 +123,7 @@ jobs:
             await browser.close();
           }
           JS
-          node /tmp/live-acceptance.mjs
+          node live-acceptance.mjs
 
       - name: Upload acceptance evidence
         if: always()
