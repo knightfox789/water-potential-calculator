@@ -1,0 +1,57 @@
+{
+  "schema": "WPC-RELEASE-CERTIFICATE-v1",
+  "product": "Water Potential Calculator",
+  "subtitle": "Water Potential · Participation · Reporting",
+  "version": "1.1.0",
+  "status": "PASS",
+  "releaseState": "RELEASED_AND_LIVE_QUALIFIED",
+  "liveUrl": "https://knightfox789.github.io/water-potential-calculator/",
+  "qualifiedSourceCommit": "45aff97886676983c573bdd80a2e495be80d5483",
+  "qualification": {
+    "protectedMethodologyChanged": false,
+    "logicalDesign6": {"pass": 154, "total": 154},
+    "physicalFixtures": {"pass": 15, "total": 15},
+    "productFlowChecks": {"pass": 90},
+    "reportContractChecks": {"pass": 319},
+    "exportReconciliationScopes": {"pass": 39},
+    "liveBrowserAcceptance": {
+      "runId": 34304601648,
+      "artifactId": 10086188049,
+      "artifactDigest": "sha256:99f3a8c09bb9702e7ebdb7ba3260e1c8ce82519816bcacdb3ebf2369ab29cc64",
+      "status": "PASS",
+      "checks": 24,
+      "consoleErrors": 0,
+      "pageErrors": 0
+    },
+    "pagesDeployment": {"runId": 34304601667, "status": "PASS"},
+    "capacityAcceptance": {
+      "runId": 34304601647,
+      "artifactId": 10086195995,
+      "artifactDigest": "sha256:d4c62c3fbaecb61c0689d8bc3bcf89014fba33c86a55176618f9addf7c9c9448",
+      "status": "PASS",
+      "browser": "140.0.7339.16",
+      "hardware": {"cpus": 4, "memoryBytes": 16765378560, "platform": "linux"},
+      "syntheticQualification": {
+        "structures": 1000,
+        "personDayRecords": 1000,
+        "calendarDays": [365, 366],
+        "districts": 5,
+        "villagesMin": 50,
+        "confirmedActualProductionVolume": false
+      },
+      "nonLeapMetricsMs": {"intake": 1894, "mapping": 101, "preparation": 1830, "validation": 809, "calculation": 4710, "endToEnd": 9349, "interaction": 48, "reportsNavigation": 94, "xlsx": 337, "pdf": 161, "mainThreadGap": 397.2},
+      "leapMetricsMs": {"intake": 1909, "mapping": 89, "preparation": 1820, "validation": 804, "calculation": 4868, "endToEnd": 9499, "interaction": 49, "reportsNavigation": 81, "xlsx": 347, "pdf": 143, "mainThreadGap": 407}
+    }
+  },
+  "productBoundary": {
+    "audience": "Field engineers, practitioners and programme/M&E teams",
+    "personalBrandingOnWebLaunch": true,
+    "personalBrandingInPdfCsvXlsxJsonZipReportingOutputs": false,
+    "normalFrontendUsesHufKeyword": false,
+    "specialistAuditKeepsControlledInternalIdentifiers": true
+  },
+  "governance": {
+    "formalHufConfirmation": "SEPARATE_GOVERNANCE_NOT_CLAIMED",
+    "capacityScope": "Synthetic qualification only; this is not a claim of maximum actual production volume."
+  }
+}

@@ -2,9 +2,12 @@
 
 **Water Potential · Participation · Reporting**
 
-Water Potential Calculator is a browser-local analysis and reporting tool for field engineers, practitioners and programme/M&E teams. It turns a controlled input workbook into readable water-potential results, structure intelligence, geography summaries, participation results and decision-ready reports.
+Water Potential Calculator is a browser-local analysis and reporting tool for field engineers, practitioners and programme/M&E teams. It turns an input workbook into readable water-potential results, structure intelligence, geography summaries, participation results and decision-ready reports.
 
-**Release target: 1.1.0.** The public product intentionally uses practitioner language. Internal controlled schema, route, formula, validation and audit identifiers remain protected and are kept out of normal screens and reports.
+**Released version: 1.1.0**  
+Live application: https://knightfox789.github.io/water-potential-calculator/
+
+The public product intentionally uses practitioner language. Internal controlled schema, route, formula, validation and audit identifiers remain protected and are kept out of normal screens and reports.
 
 ## User workflow
 
@@ -18,9 +21,9 @@ Water Potential Calculator is a browser-local analysis and reporting tool for fi
 
 Processing occurs locally in the browser. Source workbook data is not sent to an application backend. Replacing or correcting source data invalidates dependent results before recalculation.
 
-## Product design in v1.1
+## v1.1 productization
 
-The v1.1 productization release prioritizes field readability and analytical storytelling:
+Version 1.1 prioritizes field readability and analytical storytelling:
 
 - launch page with a simple Upload → Check → Calculate → Explore → Report journey;
 - short practitioner-facing labels instead of software-development language;
@@ -36,26 +39,28 @@ The web launch page includes a small developer profile block. **Personal brandin
 
 ## Calculation and governance boundary
 
-The protected E01–E09 methodology remains unchanged. The application still preserves the controlled rules for input interpretation, canonicalization, validation, routing, calculation, assurance, aggregation and audit. Presentation changes do not create new KPI formulas or recalculate dashboard values independently.
+The protected E01–E09 methodology remains unchanged. The application preserves the controlled rules for input interpretation, canonicalization, validation, routing, calculation, assurance, aggregation and audit. Presentation changes do not create new KPI formulas or recalculate dashboard values independently.
 
 Missing, HOLD, excluded and not-calculated values remain distinct from numeric zero. Display-unit conversion is presentation-only. Water volumes and person-days remain separate result families.
 
-## Verification
+## Release qualification
 
-```sh
-npm install --no-save --package-lock=false jszip@3.10.1 @xmldom/xmldom@0.9.12 playwright@1.55.0
-npm test
-npm run test:product
-node tests/protected/run.mjs
-node tests/protected/remaining80.mjs
-node tests/protected/design6-summary.mjs
-npm run build:pages
-npx playwright install --with-deps chromium
-npm run accept:browser
-```
+v1.1.0 passed:
 
-Final release requires protected regression, 154/154 Design-6 logical acceptance, 15/15 physical fixtures, browser acceptance, the existing fixed-budget 1,000-structure/1,000-person-day synthetic capacity envelope, deployed-file equality and live Pages acceptance.
+- 154/154 Design-6 logical acceptance;
+- 15/15 physical workbook fixtures;
+- 90 product-flow checks;
+- 319 report-contract checks;
+- 39 export-reconciliation scopes;
+- 24/24 live field-user browser checks with zero page/console errors;
+- fixed-budget synthetic browser qualification for 1,000 structures + 1,000 person-day records, 365/366 days, five districts and at least 50 villages;
+- GitHub Pages deployment and live smoke verification;
+- protected methodology hash verification with `methodologyChanged=false`.
 
-## Recovery
+The synthetic capacity qualification is not a claim of maximum actual production volume. Formal HUF confirmation remains separate governance and is not claimed by the software release.
 
-The sole authorized release repository is `knightfox789/HUF-KPI-acceptance-test`. See `docs/release/RECOVERY_AND_CHANGE_GUIDE.md`, `docs/release/USER_GUIDE.md`, the release certificate/checksums and `docs/continuity/master-plan.md` before changing a released build.
+See `RELEASE_CERTIFICATE.json` and `FINAL_VALIDATION_STATUS.json` for the machine-readable release state.
+
+## Recovery and future changes
+
+The active release repository is `knightfox789/water-potential-calculator`. Preserve the protected-core hashes and release evidence before future changes. User-facing presentation improvements must continue to calculate once from the protected pipeline rather than introducing independent dashboard/report formulas.

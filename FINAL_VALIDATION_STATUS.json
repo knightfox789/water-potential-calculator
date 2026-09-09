@@ -1,25 +1,41 @@
 {
   "schema": "WPC-RELEASE-STATUS-v1",
   "version": "1.1.0",
-  "status": "PRODUCTIZATION_COMPLETE_GATED_RELEASE_BUILD",
+  "status": "PASS",
+  "releaseState": "RELEASED_AND_LIVE_QUALIFIED",
+  "publicProduct": "Water Potential Calculator",
+  "subtitle": "Water Potential · Participation · Reporting",
+  "liveUrl": "https://knightfox789.github.io/water-potential-calculator/",
+  "qualifiedSourceCommit": "45aff97886676983c573bdd80a2e495be80d5483",
   "protectedCore": "UNCHANGED",
   "methodologyChanged": false,
-  "sourceSnapshotQualification": "This source status is prepared before deployment. RELEASE_CERTIFICATE.json published with the accepted release records the exact commit and completed live gates.",
-  "publicProduct": "Water Potential Calculator",
-  "subtitle": "Water Potential \u00b7 Participation \u00b7 Reporting",
   "audience": "Field engineers, practitioners and programme/M&E teams",
   "personalBrandingExports": "PROHIBITED",
-  "releaseGates": [
-    "foundation/product reconciliation",
-    "154/154 Design-6 logical",
-    "15/15 physical fixtures",
-    "curated browser acceptance",
-    "fixed-budget capacity acceptance",
-    "every deployed file hash matches curated payload",
-    "live browser acceptance",
-    "release package/hash verification"
-  ],
-  "performanceBudget": "tests/performance/budget.json",
-  "actualProductionVolumeSupplied": false,
+  "acceptance": {
+    "design6Logical": "154/154 PASS",
+    "physicalFixtures": "15/15 PASS",
+    "productFlowChecks": 90,
+    "reportContractChecks": 319,
+    "exportReconciliationScopes": 39,
+    "liveBrowserChecks": "24/24 PASS",
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "capacityAcceptance": "PASS"
+  },
+  "capacityQualification": {
+    "synthetic": true,
+    "structures": 1000,
+    "personDayRecords": 1000,
+    "calendarDays": [365, 366],
+    "districts": 5,
+    "villagesMin": 50,
+    "confirmedActualProductionVolume": false
+  },
+  "evidence": {
+    "pagesRunId": 34304601667,
+    "liveAcceptanceRunId": 34304601648,
+    "capacityRunId": 34304601647,
+    "releaseCertificate": "RELEASE_CERTIFICATE.json"
+  },
   "formalHufConfirmation": "SEPARATE_GOVERNANCE_NOT_CLAIMED"
 }
