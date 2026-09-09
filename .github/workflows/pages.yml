@@ -1,0 +1,113 @@
+name: Deploy Water Potential Calculator
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: water-potential-pages
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify deployment payload and protected methodology
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib, sys
+
+          root = pathlib.Path('.')
+          required = [
+              'index.html', 'VERSION', 'FINAL_VALIDATION_STATUS.json',
+              'PROTECTED_CORE_MANIFEST.json', 'RELEASE_MANIFEST.json'
+          ]
+          missing = [p for p in required if not (root / p).is_file()]
+          if missing:
+              raise SystemExit(f'Missing required deployment files: {missing}')
+
+          version = (root / 'VERSION').read_text(encoding='utf-8').strip()
+          if version != '1.1.0':
+              raise SystemExit(f'Unexpected VERSION: {version!r}')
+
+          final_status = json.loads((root / 'FINAL_VALIDATION_STATUS.json').read_text(encoding='utf-8'))
+          if final_status.get('version') != '1.1.0':
+              raise SystemExit('FINAL_VALIDATION_STATUS.json is not for v1.1.0')
+          if final_status.get('methodologyChanged') is not False:
+              raise SystemExit('Protected methodology change detected in release status')
+
+          manifest = json.loads((root / 'PROTECTED_CORE_MANIFEST.json').read_text(encoding='utf-8'))
+          failures = []
+          for item in manifest.get('protectedFiles', []):
+              path = root / item['path']
+              if not path.is_file():
+                  failures.append(f"missing {item['path']}")
+                  continue
+              actual = hashlib.sha256(path.read_bytes()).hexdigest()
+              expected = item['sha256']
+              if actual != expected:
+                  failures.append(f"hash mismatch {item['path']} expected={expected} actual={actual}")
+          if failures:
+              raise SystemExit('Protected-core verification failed:\n' + '\n'.join(failures))
+
+          html = (root / 'index.html').read_text(encoding='utf-8')
+          if 'Water Potential Calculator' not in html:
+              raise SystemExit('Public product identity missing from index.html')
+
+          print(f'PASS: Water Potential Calculator {version}')
+          print(f'PASS: {len(manifest.get("protectedFiles", []))} protected files hash-verified')
+          print('PASS: methodologyChanged=false')
+          PY
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+
+  deploy:
+    needs: validate
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  live-smoke:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm live site responds and public identity is present
+        env:
+          LIVE_URL: https://knightfox789.github.io/water-potential-calculator/
+        shell: bash
+        run: |
+          set -euo pipefail
+          for i in {1..12}; do
+            if curl -fsSL "$LIVE_URL" -o /tmp/index.html; then
+              break
+            fi
+            sleep 10
+          done
+          test -s /tmp/index.html
+          grep -q 'Water Potential Calculator' /tmp/index.html
+          curl -fsSL "${LIVE_URL}VERSION" | grep -qx '1.1.0'
+          echo "PASS: live site responds at $LIVE_URL"
+          echo "PASS: public identity and VERSION 1.1.0 verified"
