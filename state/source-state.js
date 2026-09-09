@@ -1,0 +1,3 @@
+function isPlain(value){return Array.isArray(value)||Boolean(value&&typeof value==='object'&&Object.getPrototypeOf(value)===Object.prototype);}
+function deepFreeze(value){if(!isPlain(value)||Object.isFrozen(value))return value;for(const child of Object.values(value))deepFreeze(child);return Object.freeze(value);}
+export const createSourceState=({name=null,size=null,sha256=null,templateVersion=null,sourceSessionId=null,kind=null,synthetic=false,sampleId=null,lastModified=null,preflight=null}={})=>deepFreeze({name,size,sha256,templateVersion,sourceSessionId,kind,synthetic:Boolean(synthetic),sampleId,lastModified,preflight});

@@ -1,0 +1,98 @@
+{
+  "policyVersion": "HUF-CANONICALIZATION-v1.1",
+  "schemaVersion": "HUF-SS-INPUT-v1.1",
+  "nullPolicy": {
+    "nullTokens": [null, ""],
+    "trimWhitespaceBeforeBlankCheck": true,
+    "zeroIsNull": false,
+    "notes": "Only null/undefined/empty-or-whitespace values are blank. Text such as NA, N/A, -, nil is not silently converted to null."
+  },
+  "textPolicy": {
+    "unicodeNormalization": "NFC",
+    "trimOuterWhitespace": true,
+    "collapseInternalWhitespace": false
+  },
+  "datePolicy": {
+    "acceptedCanonicalForms": ["YYYY-MM-DD", "ISO-8601 timestamp"],
+    "rejectAmbiguousTextDates": true,
+    "notes": "Excel date cells are already recovered as ISO values by Engine 1. Engine 3 does not guess DD/MM vs MM/DD text."
+  },
+  "numberPolicy": {
+    "allowNumericStrings": true,
+    "allowThousandsSeparators": true,
+    "acceptedThousandsPattern": "Western or Indian comma grouping",
+    "rejectNonFinite": true
+  },
+  "units": {
+    "m": {
+      "canonical": ["m", "meter", "meters", "metre", "metres"],
+      "conversions": {"cm": 0.01, "mm": 0.001, "ft": 0.3048, "feet": 0.3048}
+    },
+    "m2": {
+      "canonical": ["m2", "m²", "sqm", "sq m", "square meter", "square meters", "square metre", "square metres"],
+      "conversions": {"ha": 10000}
+    },
+    "m3": {
+      "canonical": ["m3", "m³", "cum", "cubic meter", "cubic meters", "cubic metre", "cubic metres"],
+      "conversions": {"l": 0.001, "litre": 0.001, "litres": 0.001, "liter": 0.001, "liters": 0.001}
+    },
+    "ha": {
+      "canonical": ["ha", "hectare", "hectares"],
+      "conversions": {"m2": 0.0001, "m²": 0.0001, "sqm": 0.0001}
+    },
+    "mm/day": {
+      "canonical": ["mm/day", "mm/d", "mm per day", "mm day"],
+      "conversions": {"cm/day": 10, "cm/d": 10}
+    },
+    "mm/hour": {
+      "canonical": ["mm/hour", "mm/hr", "mm/h", "mm per hour"],
+      "conversions": {"cm/hour": 10, "cm/hr": 10, "cm/h": 10}
+    },
+    "decimal degrees": {
+      "canonical": ["decimal degrees", "degree", "degrees", "deg"],
+      "conversions": {}
+    },
+    "fraction 0-1": {
+      "canonical": ["fraction", "fraction 0-1", "ratio"],
+      "conversions": {"%": 0.01, "percent": 0.01, "percentage": 0.01}
+    },
+    "percent 0-100": {
+      "canonical": ["%", "percent", "percentage", "percent 0-100"],
+      "conversions": {}
+    },
+    "hours": {
+      "canonical": ["hours", "hour", "hr", "hrs", "h"],
+      "conversions": {"minutes": 0.016666666666666666, "minute": 0.016666666666666666, "min": 0.016666666666666666}
+    },
+    "person-days": {
+      "canonical": ["person-days", "person days", "person-day", "pd"],
+      "conversions": {}
+    },
+    "quantity/person-day": {
+      "canonical": ["quantity/person-day", "quantity per person-day", "quantity/person day"],
+      "conversions": {}
+    },
+    "source unit": {
+      "canonical": [],
+      "conversions": {},
+      "passthrough": true
+    },
+    "date": {
+      "canonical": ["date"],
+      "conversions": {},
+      "passthrough": true
+    },
+    "": {
+      "canonical": [],
+      "conversions": {},
+      "passthrough": true
+    }
+  },
+  "lineage": {
+    "preserveSourceValue": true,
+    "preserveSourceHeader": true,
+    "preserveSourceSheet": true,
+    "preserveSourceRowNumber": true,
+    "preserveMappingMethod": true
+  }
+}

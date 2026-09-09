@@ -1,0 +1,261 @@
+{
+  "schema_version": "HUF-SS-INPUT-v1.1",
+  "sheet_aliases": {
+    "01_Control": [
+      "Control",
+      "Project Control",
+      "Run Control"
+    ],
+    "02_Structures": [
+      "Structures",
+      "Structure Master",
+      "Structure Register"
+    ],
+    "03_Technical": [
+      "Technical",
+      "Technical Details",
+      "Structure Technical"
+    ],
+    "04_Catchments": [
+      "Catchments",
+      "Catchment"
+    ],
+    "05_Cascade_Links": [
+      "Cascade Links",
+      "Cascade",
+      "Upstream Downstream Links"
+    ],
+    "06_Daily_Rainfall": [
+      "Daily Rainfall",
+      "Rainfall",
+      "Rainfall Daily"
+    ],
+    "07_Hydro_Params": [
+      "Hydro Params",
+      "Hydrology Parameters",
+      "Water Parameters"
+    ],
+    "08_Stage_Area_Optional": [
+      "Stage Area",
+      "Stage-Area",
+      "Stage Area Optional"
+    ],
+    "09_Silt_Assessment": [
+      "Silt Assessment",
+      "Silt"
+    ],
+    "10_Person_Days": [
+      "Person Days",
+      "Person-Days",
+      "Labour Days"
+    ],
+    "11_Evidence": [
+      "Evidence",
+      "Evidence Register"
+    ]
+  },
+  "field_aliases": {
+    "CTL-001": [
+      "Template",
+      "Template Ver"
+    ],
+    "CTL-002": [
+      "Project Code",
+      "Project Identifier"
+    ],
+    "CTL-003": [
+      "Project",
+      "Project Title"
+    ],
+    "CTL-004": [
+      "PIA",
+      "Implementing Agency"
+    ],
+    "CTL-005": [
+      "FY Start",
+      "Reporting From",
+      "Start Date"
+    ],
+    "CTL-006": [
+      "FY End",
+      "Reporting To",
+      "End Date"
+    ],
+    "STR-001": [
+      "Structure ID",
+      "Structure Code",
+      "Asset ID"
+    ],
+    "STR-002": [
+      "Structure",
+      "Asset Name"
+    ],
+    "STR-003": [
+      "Type",
+      "Structure Category"
+    ],
+    "STR-005": [
+      "Intervention",
+      "Intervention Category"
+    ],
+    "STR-006": [
+      "Lining",
+      "Lined Status"
+    ],
+    "STR-011": [
+      "Block Name"
+    ],
+    "STR-012": [
+      "GP",
+      "Gram Panchayat Name"
+    ],
+    "STR-013": [
+      "Village Name"
+    ],
+    "TEC-001": [
+      "Structure ID",
+      "Structure Code"
+    ],
+    "TEC-002": [
+      "Length m",
+      "Structure Length"
+    ],
+    "TEC-003": [
+      "Width",
+      "Breadth",
+      "Storage Width"
+    ],
+    "TEC-004": [
+      "Depth",
+      "Height",
+      "Height Depth"
+    ],
+    "TEC-017": [
+      "Rain Gauge ID",
+      "Station ID"
+    ],
+    "TEC-020": [
+      "Surface Area",
+      "Full Area"
+    ],
+    "TEC-021": [
+      "Base Area",
+      "Measured Base Area",
+      "Infiltration Base Area"
+    ],
+    "TEC-022": [
+      "Hydro Group ID",
+      "Water Parameter Group ID"
+    ],
+    "CAT-002": [
+      "Structure ID",
+      "Structure Code"
+    ],
+    "CAT-003": [
+      "Method",
+      "Catchment Calculation Method"
+    ],
+    "CAT-005": [
+      "Free Catchment",
+      "Free Area"
+    ],
+    "RAN-001": [
+      "Rainfall Station ID",
+      "Rain Gauge ID"
+    ],
+    "RAN-003": [
+      "Rainfall Date",
+      "Observation Date"
+    ],
+    "RAN-004": [
+      "Rainfall",
+      "Rainfall mm",
+      "Daily Rain mm"
+    ],
+    "HYP-001": [
+      "Hydro Group ID",
+      "Water Parameter Group ID"
+    ],
+    "HYP-002": [
+      "Infiltration",
+      "Infiltration mm/hr",
+      "Infiltration Rate mm/hr"
+    ],
+    "HYP-005": [
+      "Jan Evaporation",
+      "January Evaporation"
+    ],
+    "HYP-006": [
+      "Feb Evaporation",
+      "February Evaporation"
+    ],
+    "HYP-007": [
+      "Mar Evaporation",
+      "March Evaporation"
+    ],
+    "HYP-008": [
+      "Apr Evaporation",
+      "April Evaporation"
+    ],
+    "HYP-009": [
+      "May Evaporation"
+    ],
+    "HYP-010": [
+      "Jun Evaporation",
+      "June Evaporation"
+    ],
+    "HYP-011": [
+      "Jul Evaporation",
+      "July Evaporation"
+    ],
+    "HYP-012": [
+      "Aug Evaporation",
+      "August Evaporation"
+    ],
+    "HYP-013": [
+      "Sep Evaporation",
+      "September Evaporation"
+    ],
+    "HYP-014": [
+      "Oct Evaporation",
+      "October Evaporation"
+    ],
+    "HYP-015": [
+      "Nov Evaporation",
+      "November Evaporation"
+    ],
+    "HYP-016": [
+      "Dec Evaporation",
+      "December Evaporation"
+    ],
+    "PD-001": [
+      "Person Day ID",
+      "Labour Record ID"
+    ],
+    "PD-002": [
+      "Work ID",
+      "Structure ID"
+    ],
+    "PD-003": [
+      "Activity",
+      "Work Scope"
+    ],
+    "PD-007": [
+      "Person Day Category",
+      "Labour Category"
+    ],
+    "EVD-001": [
+      "Evidence ID",
+      "Document ID"
+    ],
+    "EVD-003": [
+      "Related ID",
+      "Record ID"
+    ]
+  },
+  "fuzzy": {
+    "minimum_score": 0.82,
+    "minimum_margin": 0.02,
+    "max_suggestions_per_field": 3
+  }
+}

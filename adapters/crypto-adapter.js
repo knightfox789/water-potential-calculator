@@ -1,0 +1,1 @@
+export async function sha256Hex(value){const bytes=value instanceof ArrayBuffer?value:new TextEncoder().encode(String(value));const hash=await crypto.subtle.digest('SHA-256',bytes);return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('');}

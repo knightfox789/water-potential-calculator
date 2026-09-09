@@ -1,0 +1,55 @@
+{
+  "policy_id": "HUF-E08-STATUS-SEGREGATED-AGGREGATION-v1.0",
+  "depends_on": {
+    "result_schema": "HUF-D5-RESULT-AUDIT-REPORTING-v1.0",
+    "validation_rulebook": "HUF-D4-VALIDATION-READINESS-v1.0"
+  },
+  "reporting_hierarchy": [
+    "structure",
+    "village",
+    "gram_panchayat",
+    "block",
+    "district",
+    "PIA",
+    "project"
+  ],
+  "assurance_statuses": [
+    "accepted-certified",
+    "provisional-evidence-pending",
+    "calculated-warning",
+    "not-calculated",
+    "excluded"
+  ],
+  "water_components": [
+    "KPI-1.1.1",
+    "KPI-1.1.2",
+    "LINED-FP",
+    "WATER-HOLD",
+    "WATER-EXCL"
+  ],
+  "person_day_component": "KPI-1.2.1",
+  "numeric_statuses": [
+    "accepted-certified",
+    "provisional-evidence-pending",
+    "calculated-warning"
+  ],
+  "terminal_non_numeric_statuses": [
+    "not-calculated",
+    "excluded"
+  ],
+  "display_totals": {
+    "accepted_certified": "accepted-certified only",
+    "calculated_total": "accepted-certified + provisional-evidence-pending + calculated-warning",
+    "calculated_total_label_rule": "Calculated Total must never be labelled Certified Total"
+  },
+  "qa_rules": {
+    "VAL-090": "Assurance buckets remain segregated; terminal statuses have null numeric totals and are never mixed into compliant numeric totals.",
+    "VAL-091": "Every source E07 assurance record reconciles to exactly one aggregate bucket at each applicable hierarchy level; project-level source counts equal E07 source counts."
+  },
+  "null_policy": "No source numeric result means null aggregate numeric result for that status/component bucket; never emit placeholder zero.",
+  "privacy": {
+    "raw_participant_names": "not used",
+    "project_data_in_url": false,
+    "persistence": "memory-only"
+  }
+}

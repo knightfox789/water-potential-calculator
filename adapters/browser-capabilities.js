@@ -1,0 +1,1 @@
+export const browserCapabilities=()=>Object.freeze({worker:typeof Worker!=='undefined',crypto:Boolean(globalThis.crypto?.subtle),fileApi:typeof File!=='undefined',domParser:typeof DOMParser!=='undefined'});

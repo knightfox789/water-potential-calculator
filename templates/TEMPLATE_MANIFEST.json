@@ -1,0 +1,18 @@
+{
+  "schema": "HUF-CONTROLLED-TEMPLATE-MANIFEST-v1",
+  "templateVersion": "HUF-SS-INPUT-v1.1",
+  "file": "HUF-SS-INPUT-v1.1.xlsx",
+  "path": "templates/HUF-SS-INPUT-v1.1.xlsx",
+  "sha256": "e654bb67cd8a5223224bdefd9406d2714b7cfb2ee045b52a7c3c9b5f9711a5bd",
+  "sizeBytes": 183833,
+  "classification": "controlled blank input template",
+  "inputOnly": true,
+  "officialKpiFormulasEmbedded": false,
+  "controlledMetadata": {
+    "templateVersion": "HUF-SS-INPUT-v1.1",
+    "formulaCatalogVersion": "HUF-DESIGN2-FORMULA-CATALOG-v1.1",
+    "capacityCatalogVersion": "legacy-capacity-v1"
+  },
+  "sourceDerivation": "Derived from the protected v1.1 leap golden workbook layout using artifact_tool; synthetic data rows removed; controlled headers, instructions, formatting, validation and 99_Lookups retained.",
+  "governance": "Do not alter template/schema meaning outside governed HUF template methodology change."
+}

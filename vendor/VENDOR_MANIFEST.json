@@ -1,0 +1,43 @@
+{
+  "schema": "HUF-VENDOR-MANIFEST-v1",
+  "generatedFor": "0.1.0-foundation",
+  "runtimeCdnRequired": false,
+  "vendors": [
+    {
+      "library": "JSZip",
+      "version": "3.10.1",
+      "path": "vendor/jszip/jszip.min.js",
+      "sha256": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
+      "purpose": "Controlled XLSX ZIP parsing",
+      "source": "Protected HUF v1.0.0 release",
+      "licensePath": "vendor/jszip/JSZIP-LICENSE.md"
+    },
+    {
+      "library": "jsPDF",
+      "version": "3.0.3",
+      "path": "vendor/jspdf/jspdf.umd.min.js",
+      "sha256": "509a1b5b1f3402b81e28510e46145618373a9cba61c94c119d5e9242a86261e1",
+      "purpose": "Structured local PDF generation",
+      "source": "npm jspdf@3.0.3",
+      "licensePath": "vendor/jspdf/LICENSE"
+    },
+    {
+      "library": "DejaVu Sans",
+      "version": "2.37",
+      "path": "vendor/fonts/dejavu-sans.js",
+      "sha256": "0de0544fae34b888a6f6a2c634d722d501efb31eb4e75e55559708ee11c37dd1",
+      "purpose": "Embedded PDF normal/bold font with deterministic text metrics",
+      "source": "System-provided unmodified DejaVu font files",
+      "licensePath": "vendor/fonts/LICENSE"
+    },
+    {
+      "library": "@xmldom/xmldom",
+      "version": "0.9.12",
+      "path": "vendor/xmldom/xmldom.js",
+      "sha256": "ba6d92dd6e599fc34061f59c80f0ad26dffd7642db2951321b196d0bae4e2fa5",
+      "purpose": "Worker-local XML DOM adapter for unchanged controlled XLSX parser",
+      "source": "npm @xmldom/xmldom0.9.12 bundled with esbuild0.25.9, platform browser, format esm",
+      "licensePath": "vendor/xmldom/LICENSE"
+    }
+  ]
+}

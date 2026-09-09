@@ -1,0 +1,85 @@
+{
+  "policy_id": "HUF-E09-AUDIT-RUN-MANIFEST-v1.0",
+  "result_schema_version": "HUF-D5-RESULT-AUDIT-REPORTING-v1.0",
+  "privacy_mode_default": "standard",
+  "pii_reporting_policy": "Raw participant names and source workbook bytes are excluded from standard audit exports. Pseudonymous/result identifiers may be included where needed for lineage.",
+  "project_data_in_url": false,
+  "manifest_required_versions": [
+    "routeRegistry",
+    "formulaCatalog",
+    "inputSchema",
+    "canonicalizationPolicy",
+    "validationRulebook",
+    "routingPolicy",
+    "calculationPolicy",
+    "assurancePolicy",
+    "aggregationPolicy",
+    "auditPolicy"
+  ],
+  "pipeline_events": [
+    {
+      "engine": "E01",
+      "event_type": "intake",
+      "action": "SOURCE_INTAKE"
+    },
+    {
+      "engine": "E02",
+      "event_type": "mapping",
+      "action": "MAPPING_FINALIZED"
+    },
+    {
+      "engine": "E03",
+      "event_type": "normalize",
+      "action": "CANONICALIZATION_FINALIZED"
+    },
+    {
+      "engine": "E04",
+      "event_type": "validate",
+      "action": "VALIDATION_FINALIZED"
+    },
+    {
+      "engine": "E05",
+      "event_type": "route",
+      "action": "OFFICIAL_ROUTING_FINALIZED"
+    },
+    {
+      "engine": "E06",
+      "event_type": "calculate",
+      "action": "CALCULATION_FINALIZED"
+    },
+    {
+      "engine": "E07",
+      "event_type": "assure",
+      "action": "ASSURANCE_FINALIZED"
+    },
+    {
+      "engine": "E08",
+      "event_type": "aggregate",
+      "action": "AGGREGATION_FINALIZED"
+    },
+    {
+      "engine": "E09",
+      "event_type": "manifest",
+      "action": "RUN_MANIFEST_FINALIZED"
+    }
+  ],
+  "standard_audit_export": {
+    "include": [
+      "runManifest",
+      "validationIssues",
+      "auditEvents",
+      "resultInventory",
+      "projectSummary",
+      "versionIds",
+      "snapshotHashes"
+    ],
+    "exclude": [
+      "sourceWorkbookBytes",
+      "rawWorkbookRows",
+      "fullCanonicalTables",
+      "rawParticipantNames",
+      "genderByDefault",
+      "observedSensitiveValuesByDefault"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "policy_id": "HUF-E05-OFFICIAL-ROUTING-v1.0",
+  "status": "IMPLEMENTATION CONTRACT derived from frozen Design 1 v1.1",
+  "water_route_precedence": [
+    "governance exclusion",
+    "subsurface exclusion",
+    "partly-lined HOLD",
+    "fully-lined Farm Pond",
+    "timing class KPI 1.1.1 vs KPI 1.1.2",
+    "new vs rejuvenation A/B"
+  ],
+  "person_day_routes": [
+    {"category":"Paid labour","route_id":"PD-DIRECT","basis":"verified direct paid days","independent":true},
+    {"category":"Community contribution","route_id":"PD-COMMUNITY","basis":"verified hours / 8","independent":true},
+    {"category":"Volume-based estimate","route_id":"PD-VOLUME","basis":"certified quantity / approved productivity norm","independent":true},
+    {"category":"Machinery-support labour","route_id":"PD-MACHINERY","basis":"verified operator/driver/helper labour only","independent":true}
+  ],
+  "rules": [
+    "Exactly one official water route is assigned for each valid routable structure/run.",
+    "Validation readiness does not silently reroute a structure to another water route.",
+    "If route-defining identity/timing/rejuvenation inputs are unresolved, official water route remains null and route decision is unresolved.",
+    "Workbook-level not-ready status withholds official routing truth.",
+    "HOLD and excluded routes are official controlled terminal routes.",
+    "KPI 1.2.1 person-day routing is parallel and independent from water-route readiness.",
+    "Engine 5 does not calculate water volume or person-days."
+  ]
+}

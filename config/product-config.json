@@ -1,0 +1,43 @@
+{
+  "appName": "Water Potential Calculator",
+  "appVersion": "1.1.0",
+  "implementationPhase": "V1.1-PRODUCTIZATION",
+  "implementationStatus": "REDESIGN_RELEASE_CANDIDATE",
+  "methodologyBaseline": "HUF protected v1.0.0 E01-E09",
+  "designVersions": {
+    "routeRegistry": "HUF-DESIGN1-ROUTE-REGISTRY-v1.1",
+    "formulaCatalog": "HUF-DESIGN2-FORMULA-CATALOG-v1.1",
+    "inputSchema": "HUF-SS-INPUT-v1.1",
+    "canonicalizationPolicy": "HUF-CANONICALIZATION-v1.1",
+    "validationRulebook": "HUF-D4-VALIDATION-READINESS-v1.0",
+    "resultSchema": "HUF-D5-RESULT-AUDIT-REPORTING-v1.0",
+    "uatContract": "HUF-D6-GOLDEN-UAT-v1.0",
+    "routingPolicy": "HUF-E05-OFFICIAL-ROUTING-v1.0",
+    "calculationPolicy": "HUF-E06-CALCULATION-CORE-v1.0",
+    "assurancePolicy": "HUF-E07-ASSURANCE-v1.0",
+    "aggregationPolicy": "HUF-E08-STATUS-SEGREGATED-AGGREGATION-v1.0",
+    "auditPolicy": "HUF-E09-AUDIT-RUN-MANIFEST-v1.0"
+  },
+  "privacy": {
+    "processing": "browser-local",
+    "projectDataInUrl": false,
+    "persistence": "memory-only",
+    "networkUpload": false
+  },
+  "acceptedExtensions": [
+    ".xlsx"
+  ],
+  "features": {
+    "foundationShell": true,
+    "workbookUpload": true,
+    "workbookPreflight": true,
+    "mappingReview": true,
+    "resultsDashboard": true,
+    "reports": true
+  },
+  "controlledTemplate": {
+    "version": "HUF-SS-INPUT-v1.1",
+    "path": "templates/HUF-SS-INPUT-v1.1.xlsx",
+    "manifest": "templates/TEMPLATE_MANIFEST.json"
+  }
+}

@@ -1,0 +1,318 @@
+{
+  "E01": {
+    "id": "E01",
+    "name": "Workbook Intake",
+    "input": "Browser File (.xlsx)",
+    "outputs": [
+      "sourceSessionId",
+      "sourceWorkbookSha256",
+      "sourceWorkbookByteLength",
+      "sheetInventory",
+      "immutableRawWorkbookSnapshot",
+      "controlMetadataHint",
+      "templateStructureHint"
+    ],
+    "mustNot": [
+      "perform Design 4 validation",
+      "assign water routes",
+      "calculate KPI values",
+      "zero-fill missing values",
+      "persist project workbook data",
+      "put project data in the URL"
+    ]
+  },
+  "E02": {
+    "id": "E02",
+    "name": "Automatic Schema Mapping + Confirmation",
+    "input": "E01 immutable raw workbook snapshot + HUF-SS-INPUT-v1.1 schema",
+    "outputs": [
+      "sheetMappings",
+      "fieldMappings",
+      "mappingMethods",
+      "mappingConfidence",
+      "confirmationState",
+      "mappingSnapshotHash",
+      "immutableMappingSnapshot"
+    ],
+    "mappingOrder": [
+      "exact field ID",
+      "normalized expected header",
+      "alias",
+      "compatible fuzzy suggestion",
+      "manual"
+    ],
+    "mustNot": [
+      "modify E01 raw source values",
+      "perform Design 4 validation",
+      "canonicalize units or values",
+      "assign water routes",
+      "calculate KPI values",
+      "persist project workbook data",
+      "put project data in the URL"
+    ]
+  },
+  "E03": {
+    "id": "E03",
+    "name": "Canonicalization & Analysis-Ready Data Model",
+    "input": "E01 immutable raw snapshot + finalized E02 mapping snapshot + HUF canonicalization policy",
+    "outputs": [
+      "typed canonical tables",
+      "field-ID keyed analysis-ready records",
+      "source/canonical value lineage",
+      "canonical units",
+      "conversion diagnostics",
+      "canonicalSnapshotHash",
+      "immutableCanonicalSnapshot"
+    ],
+    "canonicalizationRules": [
+      "blank/null remains null",
+      "numeric zero remains zero",
+      "dates use ISO YYYY-MM-DD",
+      "standard workbook units are canonical by schema",
+      "explicit supported source units are converted deterministically",
+      "unsupported explicit units remain diagnostic/null rather than guessed"
+    ],
+    "mustNot": [
+      "modify E01 raw source values",
+      "modify E02 mapping truth",
+      "perform Design 4 readiness validation",
+      "assign water routes",
+      "calculate KPI values",
+      "zero-fill missing values",
+      "persist project workbook data",
+      "put project data in the URL"
+    ]
+  },
+  "E04": {
+    "id": "E04",
+    "name": "Validation & Readiness",
+    "input": "E03 immutable canonical snapshot + Design 4 validation rulebook + Design 1 route registry context",
+    "outputs": [
+      "validationIssueRegistry",
+      "workbookReadiness",
+      "structureValidationReadiness",
+      "personDayValidationReadiness",
+      "candidateRouteHints",
+      "calendarCoverage",
+      "validationSnapshotHash",
+      "immutableValidationSnapshot"
+    ],
+    "scopeIsolation": [
+      "workbook blocker -> whole workbook",
+      "record blocker -> affected record only",
+      "rainfall series blocker -> linked WTR-111 simulation windows only",
+      "cascade network blocker -> affected component only",
+      "person-day blocker -> affected claim/work scope only",
+      "HOLD/excluded are controlled outcomes"
+    ],
+    "deferredRules": [
+      "VAL-063",
+      "VAL-066",
+      "VAL-086",
+      "VAL-087",
+      "VAL-088",
+      "VAL-089",
+      "VAL-090",
+      "VAL-091"
+    ],
+    "mustNot": [
+      "modify E01 source truth",
+      "modify E02 mapping truth",
+      "modify E03 canonical truth",
+      "publish official E05 route assignment",
+      "calculate KPI values",
+      "zero-fill missing values",
+      "persist project workbook data",
+      "put project data in the URL"
+    ]
+  },
+  "E05": {
+    "id": "E05",
+    "name": "Eligibility & Official Routing",
+    "input": "E03 immutable canonical snapshot + E04 immutable validation snapshot + frozen Design 1 route registry + E05 routing policy",
+    "outputs": [
+      "officialWaterRouteDecisions",
+      "waterEligibilityStatus",
+      "officialPersonDayRouteDecisions",
+      "routeDecisionStatus",
+      "routingContentHash",
+      "routingSnapshotHash",
+      "immutableRoutingSnapshot"
+    ],
+    "waterRouteInvariant": "at most one official frozen water route per valid structure/intervention/reporting run; unresolved route-defining inputs remain null/unresolved rather than guessed",
+    "personDayInvariant": "one category-based PD route per valid claim; independent from water readiness",
+    "mustNot": [
+      "modify E01 source truth",
+      "modify E02 mapping truth",
+      "modify E03 canonical truth",
+      "modify E04 validation truth",
+      "reroute a record merely because calculation inputs are not-ready",
+      "calculate KPI water values",
+      "calculate person-days",
+      "assign assurance",
+      "aggregate results",
+      "zero-fill missing values",
+      "persist project workbook data",
+      "put project data in the URL"
+    ]
+  },
+  "E06": {
+    "id": "E06",
+    "name": "Versioned Calculation Core",
+    "input": "E03 immutable canonical snapshot + E04 validation snapshot + E05 official routing snapshot + frozen Design 2 v1.1 formula catalog",
+    "outputs": [
+      "structureWaterCalculations",
+      "dailyBalanceTraces",
+      "personDayCalculations",
+      "KPI121TotalPersonDays",
+      "calculationQa",
+      "calculationContentHash",
+      "calculationSnapshotHash",
+      "immutableCalculationSnapshot"
+    ],
+    "calculationInvariant": "Only eligible / eligible_with_warning official E05 routes calculate. HOLD, excluded, unresolved and not-ready remain null, never zero.",
+    "formulaInvariant": "E06 is the sole official KPI calculation layer and retains full IEEE-754 precision internally.",
+    "design4QaEvaluated": [
+      "VAL-063",
+      "VAL-066",
+      "VAL-086",
+      "VAL-087",
+      "VAL-088",
+      "VAL-089"
+    ],
+    "deferredToE08": [
+      "VAL-090",
+      "VAL-091"
+    ],
+    "mustNot": [
+      "modify E01 source truth",
+      "modify E02 mapping truth",
+      "modify E03 canonical truth",
+      "modify E04 validation truth",
+      "modify E05 routing truth",
+      "calculate a not-ready/HOLD/excluded/unresolved water route",
+      "zero-fill missing values",
+      "assign E07 assurance",
+      "aggregate E08 results",
+      "round intermediate values",
+      "persist project workbook data",
+      "put project data in the URL"
+    ]
+  },
+  "E07": {
+    "id": "E07",
+    "name": "Assurance",
+    "input": "E03 canonical + E04 validation + E05 routing + immutable E06 calculation snapshot + Design 5 assurance policy/evidence",
+    "outputs": [
+      "waterAssuranceRecords",
+      "personDayAssuranceRecords",
+      "assuranceStatusCounts",
+      "evidenceCompleteness",
+      "assuranceContentHash",
+      "assuranceSnapshotHash",
+      "immutableAssuranceSnapshot"
+    ],
+    "assuranceStatuses": [
+      "accepted-certified",
+      "provisional-evidence-pending",
+      "calculated-warning",
+      "not-calculated",
+      "excluded"
+    ],
+    "invariant": "Assurance references immutable E06 results and never changes calculation values. Calculation/method warnings are distinct from evidence-only gaps.",
+    "mustNot": [
+      "modify E01 source truth",
+      "modify E02 mapping truth",
+      "modify E03 canonical truth",
+      "modify E04 validation truth",
+      "modify E05 routing truth",
+      "modify E06 calculation truth",
+      "turn null into zero",
+      "aggregate E08 results",
+      "claim formal HUF approval",
+      "persist project workbook data",
+      "put project data in the URL"
+    ]
+  },
+  "E08": {
+    "id": "E08",
+    "name": "Status-Segregated Aggregation",
+    "input": "E03 canonical + immutable E06 calculation + immutable E07 assurance snapshot + Design 5 aggregation schema/policy",
+    "outputs": [
+      "statusSegregatedAggregateResults",
+      "projectComponentSummary",
+      "hierarchyCoverage",
+      "aggregationQa",
+      "aggregationContentHash",
+      "aggregationSnapshotHash",
+      "immutableAggregationSnapshot"
+    ],
+    "reportingHierarchy": [
+      "structure",
+      "village",
+      "gram_panchayat",
+      "block",
+      "district",
+      "PIA",
+      "project"
+    ],
+    "assuranceBuckets": [
+      "accepted-certified",
+      "provisional-evidence-pending",
+      "calculated-warning",
+      "not-calculated",
+      "excluded"
+    ],
+    "design4QaEvaluated": [
+      "VAL-090",
+      "VAL-091"
+    ],
+    "invariant": "Each source E07 result contributes to exactly one assurance bucket at each applicable reporting level. Terminal statuses carry counts but null numeric totals.",
+    "mustNot": [
+      "modify E01 source truth",
+      "modify E02 mapping truth",
+      "modify E03 canonical truth",
+      "modify E04 validation truth",
+      "modify E05 routing truth",
+      "modify E06 calculation truth",
+      "modify E07 assurance truth",
+      "mix accepted/provisional/warning before aggregation",
+      "turn not-calculated/excluded null into zero",
+      "label Calculated Total as Certified Total",
+      "perform E09 audit finalization",
+      "persist project workbook data",
+      "put project data in the URL"
+    ]
+  },
+  "E09": {
+    "id": "E09",
+    "name": "Audit & Run Manifest",
+    "input": "E01 intake summary + immutable E02\u2013E08 snapshots + Design 5 result/audit schema + E09 audit policy",
+    "outputs": [
+      "runManifest",
+      "validationIssueExport",
+      "appendOnlyAuditEvents",
+      "resultInventory",
+      "versionIds",
+      "snapshotHashes",
+      "runManifestContentHash",
+      "auditPackageContentHash",
+      "auditSnapshotHash",
+      "immutableAuditSnapshot"
+    ],
+    "invariant": "E09 records provenance only. It never changes upstream truth. Standard audit export excludes raw workbook bytes, full canonical tables and raw participant names.",
+    "mustNot": [
+      "modify E01 source truth",
+      "modify E02 mapping truth",
+      "modify E03 canonical truth",
+      "modify E04 validation truth",
+      "modify E05 routing truth",
+      "modify E06 calculation truth",
+      "modify E07 assurance truth",
+      "modify E08 aggregation truth",
+      "persist project workbook data",
+      "put project data in the URL",
+      "include hidden reasoning in audit events"
+    ]
+  }
+}

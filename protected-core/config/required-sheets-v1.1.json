@@ -1,0 +1,19 @@
+{
+  "templateVersion": "HUF-SS-INPUT-v1.1",
+  "headerRow": 1,
+  "sheets": [
+    {"name":"00_Instructions","role":"support"},
+    {"name":"01_Control","role":"control"},
+    {"name":"02_Structures","role":"data"},
+    {"name":"03_Technical","role":"data"},
+    {"name":"04_Catchments","role":"data"},
+    {"name":"05_Cascade_Links","role":"data"},
+    {"name":"06_Daily_Rainfall","role":"data"},
+    {"name":"07_Hydro_Params","role":"data"},
+    {"name":"08_Stage_Area_Optional","role":"optional-data"},
+    {"name":"09_Silt_Assessment","role":"data"},
+    {"name":"10_Person_Days","role":"data"},
+    {"name":"11_Evidence","role":"data"},
+    {"name":"99_Lookups","role":"support"}
+  ]
+}

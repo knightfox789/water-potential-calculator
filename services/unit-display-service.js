@@ -1,0 +1,2 @@
+export const WATER_UNITS=Object.freeze({m3:{label:'m³',divisor:1},thousand_m3:{label:'Thousand m³',divisor:1000},MCM:{label:'Million m³ / MCM',divisor:1e6},BL:{label:'Billion litres',divisor:1e6}});
+export function waterDisplay(value,unit='m3'){if(value===null||value===undefined)return null;const spec=WATER_UNITS[unit];if(!spec)throw new Error('Unsupported display unit');return value/spec.divisor;}

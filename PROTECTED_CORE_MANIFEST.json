@@ -1,0 +1,167 @@
+{
+  "schema": "HUF-PROTECTED-CORE-MANIFEST-v1",
+  "generatedFor": "0.1.0-foundation",
+  "sourceRelease": {
+    "file": "HUF_Supply_Side_KPI_Calculator_v1.0.0_FINAL(2).zip",
+    "sha256": "6ff4a19f65e2bd36a38863c98289ad5e5b45870aabf3513574ee134285302392",
+    "classification": "HUF protected operational final v1.0.0"
+  },
+  "changePolicy": "RED methodology governance required for any protected file change",
+  "protectedFiles": [
+    {
+      "path": "protected-core/config/aggregation-policy-v1.0.json",
+      "sha256": "04b5c5dd1373dec6555c39cdd127c08b764180ba0c5d72359e9630b1f43a2a06",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/assurance-policy-v1.0.json",
+      "sha256": "92d9eb6c5d1c969c0852ae476b5afc0d7d89cfdc74b20dafb8a50c28e1548ae7",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/audit-policy-v1.0.json",
+      "sha256": "435d3941576f4ee74f58dc340041176a0cc4b5dcf5e0dbe446662de7236ab7ce",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/canonicalization-policy-v1.1.json",
+      "sha256": "b5a8fc9207fcdf64f7885d99d2f29b6e0711296df300498b816e1898951a3c2d",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/engine-contracts-v1.json",
+      "sha256": "2498a06cf2db3277ba6a445d1c24db51d9d7bc01b8b82748a33a50c7e0a5a7a8",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/formula-catalog-v1.1.json",
+      "sha256": "f573d5480493e8d13daab4be3d6e41e1b2d0d180c21cf995657cbbe279618cdc",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/input-schema-v1.1.json",
+      "sha256": "5a7aefcf3732f233157f3b96f3952329fe36883cdd90b29f4104ef2b23e810d1",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/mapping-aliases-v1.1.json",
+      "sha256": "10ab17a15bfbbef95c546c67dba6b038a2aefebe68997d58d484972c3c143316",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/required-sheets-v1.1.json",
+      "sha256": "4b892f8d57dcdb88fef44c5e1167c300b1daacc44811f448e6fd57fe53fa8709",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/route-registry-v1.1.json",
+      "sha256": "52aed51b993c496385be9b3f549b944d73a070a5fbe50752f80d6046316b75de",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/routing-policy-v1.0.json",
+      "sha256": "2f2c019d9f27095b78dac1321e09e73e2c006d338904bd147f88a56bad90ae2f",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/config/validation-rulebook-v1.0.json",
+      "sha256": "f8d15a04cac853ad8fa10fedcbb2678e96c8787be1a1281465b6369d7b04182f",
+      "role": "controlled-config"
+    },
+    {
+      "path": "protected-core/js/core/events.js",
+      "sha256": "aa7ad8dc3b082410cfbd56333485f5348d9f3ed85e485432868db944678fc10c",
+      "role": "runtime-support"
+    },
+    {
+      "path": "protected-core/js/core/hash.js",
+      "sha256": "e6cb3b0247841dce7f99c7358b7d039b0892c4e85924f142a33ae1a9b396a5b3",
+      "role": "runtime-support"
+    },
+    {
+      "path": "protected-core/js/core/id.js",
+      "sha256": "385dd6e660df5cb4c2ac4069f87eba1a9053b6735da4b5c2b2a8a1ca5b68bbbf",
+      "role": "runtime-support"
+    },
+    {
+      "path": "protected-core/js/core/store.js",
+      "sha256": "e9d016121c340126c54af54bbf0947fc411347388574ef3193f39f0d77851b5d",
+      "role": "runtime-support"
+    },
+    {
+      "path": "protected-core/js/engines/engine01-intake.js",
+      "sha256": "3b4d4da740fc7d435ed267ee67a6328380ae5173612ed375c50c7d94afa63772",
+      "role": "controlled-engine",
+      "expectedHistoricalSha256": "3b4d4da740fc7d435ed267ee67a6328380ae5173612ed375c50c7d94afa63772",
+      "historicalHashMatch": true
+    },
+    {
+      "path": "protected-core/js/engines/engine02-mapping.js",
+      "sha256": "46b51031ffa49637ff42f2120eea1f06111767a54a94890b2902d9341e6f7da8",
+      "role": "controlled-engine",
+      "expectedHistoricalSha256": "46b51031ffa49637ff42f2120eea1f06111767a54a94890b2902d9341e6f7da8",
+      "historicalHashMatch": true
+    },
+    {
+      "path": "protected-core/js/engines/engine03-canonicalization.js",
+      "sha256": "88d455ac42fab9fb2bf9ce2dbcef2a0956e05fda118b4a2b15e0d48bebabde21",
+      "role": "controlled-engine",
+      "expectedHistoricalSha256": "88d455ac42fab9fb2bf9ce2dbcef2a0956e05fda118b4a2b15e0d48bebabde21",
+      "historicalHashMatch": true
+    },
+    {
+      "path": "protected-core/js/engines/engine04-validation.js",
+      "sha256": "2754a96576c006809af3fb5d53177eddb37f2cb6658803e29544b88be8032d8b",
+      "role": "controlled-engine",
+      "expectedHistoricalSha256": "2754a96576c006809af3fb5d53177eddb37f2cb6658803e29544b88be8032d8b",
+      "historicalHashMatch": true
+    },
+    {
+      "path": "protected-core/js/engines/engine05-routing.js",
+      "sha256": "3e8b984e8e3d00fa05b3080c251fb814f1709ad2ac76a82f98163d65ca9cb3e1",
+      "role": "controlled-engine",
+      "expectedHistoricalSha256": "3e8b984e8e3d00fa05b3080c251fb814f1709ad2ac76a82f98163d65ca9cb3e1",
+      "historicalHashMatch": true
+    },
+    {
+      "path": "protected-core/js/engines/engine06-calculation.js",
+      "sha256": "8130d3fff6269dbc2a246f4a5cf8807790e11c5e2e7792892020f955c01cddf2",
+      "role": "controlled-engine",
+      "expectedHistoricalSha256": "8130d3fff6269dbc2a246f4a5cf8807790e11c5e2e7792892020f955c01cddf2",
+      "historicalHashMatch": true
+    },
+    {
+      "path": "protected-core/js/engines/engine06-formulas.js",
+      "sha256": "88bada4d160faa56210802520049821288b3575db0908ca7b105373420284f2b",
+      "role": "controlled-engine",
+      "expectedHistoricalSha256": "88bada4d160faa56210802520049821288b3575db0908ca7b105373420284f2b",
+      "historicalHashMatch": true
+    },
+    {
+      "path": "protected-core/js/engines/engine07-assurance.js",
+      "sha256": "4a976c2b1002f6af6a925ae5429029b1d7d0581980fa3003e41c4acefdd28788",
+      "role": "controlled-engine",
+      "expectedHistoricalSha256": "4a976c2b1002f6af6a925ae5429029b1d7d0581980fa3003e41c4acefdd28788",
+      "historicalHashMatch": true
+    },
+    {
+      "path": "protected-core/js/engines/engine08-aggregation.js",
+      "sha256": "a4e922b97ff9ea9064c9394d5548e4c4b115d260cbb791b881019536fa3b320d",
+      "role": "controlled-engine",
+      "expectedHistoricalSha256": "a4e922b97ff9ea9064c9394d5548e4c4b115d260cbb791b881019536fa3b320d",
+      "historicalHashMatch": true
+    },
+    {
+      "path": "protected-core/js/engines/engine09-audit.js",
+      "sha256": "ce50d099ba11161886fc0c66e475ab0877836962ed6f3f5de909d6a35a245f84",
+      "role": "controlled-engine",
+      "expectedHistoricalSha256": "ce50d099ba11161886fc0c66e475ab0877836962ed6f3f5de909d6a35a245f84",
+      "historicalHashMatch": true
+    },
+    {
+      "path": "protected-core/js/services/xlsx-lite.js",
+      "sha256": "02b02753de16259eb5e8aac6720a05b1889c74ff66e89295d49dd6135387e92e",
+      "role": "runtime-support"
+    }
+  ]
+}

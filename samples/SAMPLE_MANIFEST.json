@@ -1,0 +1,27 @@
+{
+  "schema": "HUF-SYNTHETIC-SAMPLE-MANIFEST-v1",
+  "synthetic": true,
+  "warning": "Synthetic validation data — not project reporting data.",
+  "samples": [
+    {
+      "id": "leap",
+      "label": "Leap-year validation sample",
+      "file": "GOLDEN_E2E_LEAP_FY2023-24.xlsx",
+      "path": "samples/leap/GOLDEN_E2E_LEAP_FY2023-24.xlsx",
+      "sha256": "e1a592ce49e3a308b8d402ca65a090f5d5f0e39b7bda3484be6e653ddc015f56",
+      "sizeBytes": 195502,
+      "reportingPeriod": "FY2023-24",
+      "days": 366
+    },
+    {
+      "id": "nonleap",
+      "label": "Non-leap validation sample",
+      "file": "GOLDEN_E2E_NONLEAP_FY2024-25.xlsx",
+      "path": "samples/nonleap/GOLDEN_E2E_NONLEAP_FY2024-25.xlsx",
+      "sha256": "7c6ba9498f8c87790503331f848cf4a83db577ab95c056473e202efd22fdddeb",
+      "sizeBytes": 195495,
+      "reportingPeriod": "FY2024-25",
+      "days": 365
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "policy_id": "HUF-E07-ASSURANCE-v1.0",
+  "result_schema_version": "HUF-D5-RESULT-AUDIT-REPORTING-v1.0",
+  "assurance_statuses": [
+    "accepted-certified",
+    "provisional-evidence-pending",
+    "calculated-warning",
+    "not-calculated",
+    "excluded"
+  ],
+  "external_governance_status": "Expert-selected controlled methodology baseline; formal HUF confirmation pending",
+  "precedence": [
+    "excluded",
+    "not-calculated",
+    "calculated-warning",
+    "provisional-evidence-pending",
+    "accepted-certified"
+  ],
+  "evidence_requirements": {
+    "KPI-1.1.1": {
+      "direct_structure": ["Completion/functional evidence", "Design/MB", "Verified base area"],
+      "shared_rainfall": ["Rainfall source"],
+      "shared_hydro": ["Infiltration source", "Evaporation source"]
+    },
+    "KPI-1.1.2": {
+      "direct_structure": ["Completion/functional evidence", "Design/MB"]
+    },
+    "LINED-FP": {
+      "direct_structure": ["Completion/functional evidence", "Design/MB", "Catchment/GIS", "Rainfall source"]
+    },
+    "KPI-1.2.1": {
+      "PD-DIRECT": ["Attendance/muster"],
+      "PD-COMMUNITY": ["Community register"],
+      "PD-VOLUME": ["Certified work quantity"],
+      "PD-MACHINERY": ["Attendance/muster"]
+    }
+  },
+  "method_warning_codes": {
+    "LEGACY_DDW_RUNOFF": "Legacy-v1 DDW/runoff fallback is methodologically provisional."
+  },
+  "evidence_gap_rule_ids": ["VAL-074", "VAL-075"],
+  "non_evidence_warning_scope": ["WARNING_ONLY"],
+  "privacy": {
+    "raw_participant_names_in_assurance": false,
+    "project_data_in_url": false
+  }
+}
