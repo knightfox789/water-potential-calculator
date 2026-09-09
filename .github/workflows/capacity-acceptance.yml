@@ -1,0 +1,54 @@
+name: Capacity Acceptance
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: water-potential-capacity
+  cancel-in-progress: true
+
+jobs:
+  capacity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install acceptance dependencies
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0 @xmldom/xmldom@0.9.12
+          npx playwright install --with-deps chromium
+
+      - name: Generate declared synthetic workload
+        env:
+          HUF_PERFORMANCE_DIR: /tmp/huf-performance
+        run: node tests/performance/generate-fixture.mjs
+
+      - name: Stage browser payload
+        run: |
+          mkdir -p _site
+          rsync -a --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='tests' --exclude='_site' ./ _site/
+
+      - name: Run fixed-budget browser capacity acceptance
+        env:
+          HUF_PERFORMANCE_DIR: /tmp/huf-performance
+        run: node tests/performance/browser-capacity.mjs
+
+      - name: Upload capacity evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: water-potential-capacity-acceptance
+          path: /tmp/huf-performance
+          if-no-files-found: error
