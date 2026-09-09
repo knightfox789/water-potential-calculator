@@ -1,0 +1,134 @@
+name: Live Acceptance
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: water-potential-live-acceptance
+  cancel-in-progress: true
+
+jobs:
+  browser-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run live field-user acceptance
+        env:
+          LIVE_URL: https://knightfox789.github.io/water-potential-calculator/
+        run: |
+          cat > /tmp/live-acceptance.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+
+          const url = process.env.LIVE_URL;
+          const browser = await chromium.launch({headless:true});
+          const context = await browser.newContext({acceptDownloads:true, viewport:{width:1440,height:1000}});
+          const page = await context.newPage();
+          const consoleErrors=[];
+          const pageErrors=[];
+          page.on('console',m=>{ if(m.type()==='error') consoleErrors.push(m.text()); });
+          page.on('pageerror',e=>pageErrors.push(String(e)));
+
+          const evidence={schema:'WPC-LIVE-ACCEPTANCE-v1',version:'1.1.0',url,checks:[],consoleErrors,pageErrors};
+          const check=(name,ok,detail='')=>{evidence.checks.push({name,ok,detail}); if(!ok) throw new Error(`${name}: ${detail}`);};
+
+          try {
+            const response=await page.goto(url,{waitUntil:'networkidle',timeout:60000});
+            check('live-http',response?.ok()===true,`status ${response?.status()}`);
+            await page.locator('text=Turn structure data into clear water-potential insights.').waitFor({timeout:20000});
+            check('launch-page',true);
+            const launchText=await page.locator('body').innerText();
+            check('public-name',launchText.includes('Water Potential Calculator'));
+            check('no-visible-HUF-launch',!launchText.includes('HUF'),'HUF keyword visible on launch page');
+            check('portfolio-link',(await page.locator('[data-profile="portfolio"]').getAttribute('href'))?.includes('kaushal-gadariya-portfolio'));
+            check('linkedin-link',(await page.locator('[data-profile="linkedin"]').getAttribute('href'))?.includes('kaushal-gadariya-670221b1'));
+
+            await page.locator('button[data-sample="nonleap"]').click();
+            await page.locator('[data-selected-card]').waitFor({state:'visible',timeout:30000});
+            check('sample-load',true);
+            await page.locator('[data-review]').click();
+            await page.locator('[data-preflight-root]').waitFor({timeout:30000});
+            check('preflight',true);
+            await page.locator('[data-continue]').click();
+            await page.locator('[data-mapping-root]').waitFor({timeout:30000});
+            check('field-review',true);
+            const finalize=page.locator('[data-finalize-mapping]');
+            check('mapping-ready',await finalize.isEnabled(),'sample mapping not ready');
+            await finalize.click();
+            await page.locator('[data-preparation-root]').waitFor({timeout:60000});
+            check('data-summary',true);
+            await page.locator('[data-validate]').click();
+            await page.locator('[data-validation-root]').waitFor({timeout:60000});
+            check('data-quality',true);
+            const calc=page.locator('[data-calculate]');
+            check('calculation-enabled',await calc.isEnabled(),'sample calculation blocked');
+            await calc.click();
+            await page.locator('[data-results-root]').waitFor({timeout:120000});
+            check('results',true);
+            const resultsText=await page.locator('[data-results-root]').innerText();
+            check('results-readable',resultsText.includes('Water potential & participation'));
+            check('no-visible-HUF-results',!resultsText.includes('HUF'),'HUF keyword visible on Results');
+
+            await page.locator('button[data-route="structures"]').click();
+            await page.locator('[data-structures-root]').waitFor({timeout:30000});
+            check('structures',true);
+
+            await page.locator('button[data-route="reports"]').click();
+            await page.locator('[data-reports-root]').waitFor({timeout:30000});
+            check('reports',true);
+            const reportText=await page.locator('[data-reports-root]').innerText();
+            check('report-language',reportText.includes('Download decision-ready outputs'));
+            check('no-visible-HUF-reports',!reportText.includes('HUF'),'HUF keyword visible on Reports');
+
+            const mgmtPromise=page.waitForEvent('download',{timeout:60000});
+            await page.locator('[data-pdf-mode="management"]').click();
+            const mgmt=await mgmtPromise;
+            const mgmtPath=await mgmt.path();
+            check('management-pdf',mgmt.suggestedFilename().endsWith('.pdf') && fs.statSync(mgmtPath).size>1000,mgmt.suggestedFilename());
+
+            const techPromise=page.waitForEvent('download',{timeout:60000});
+            await page.locator('[data-pdf-mode="technical"]').click();
+            const tech=await techPromise;
+            const techPath=await tech.path();
+            check('technical-pdf',tech.suggestedFilename().endsWith('.pdf') && fs.statSync(techPath).size>1000,tech.suggestedFilename());
+
+            const csvPromise=page.waitForEvent('download',{timeout:30000});
+            await page.locator('[data-export="csv"]').click();
+            const csv=await csvPromise;
+            const csvPath=await csv.path();
+            check('results-csv',csv.suggestedFilename().endsWith('.csv') && fs.statSync(csvPath).size>100, csv.suggestedFilename());
+
+            check('no-page-errors',pageErrors.length===0,pageErrors.join('\n'));
+            check('no-console-errors',consoleErrors.length===0,consoleErrors.join('\n'));
+          } finally {
+            fs.writeFileSync('LIVE_ACCEPTANCE.json',JSON.stringify(evidence,null,2));
+            await browser.close();
+          }
+          JS
+          node /tmp/live-acceptance.mjs
+
+      - name: Upload acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: water-potential-live-acceptance
+          path: LIVE_ACCEPTANCE.json
+          if-no-files-found: error
